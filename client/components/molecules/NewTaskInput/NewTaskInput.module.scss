@@ -1,0 +1,12 @@
+.main-block {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 0 20px;
+
+  .input {
+    flex-grow: 1;
+
+    margin: 0 12px 0 0;
+  }
+}

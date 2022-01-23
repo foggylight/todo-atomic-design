@@ -1,0 +1,10 @@
+@import '../../../ui/colors.scss';
+
+.container {
+  display: flex;
+
+  padding: 8px 12px;
+  margin: 0 0 30px;
+  border-top: 2px solid $secondary;
+  border-bottom: 2px solid $secondary;
+}

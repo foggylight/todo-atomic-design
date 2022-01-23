@@ -1,0 +1,54 @@
+@import '../../../ui/colors.scss';
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  .checkbox {
+    position: absolute;
+
+    opacity: 0;
+
+    &:checked ~ .checkmark:after {
+      border-color: $accent;
+    }
+
+    &:checked ~ .checkmark {
+      border-color: $accent;
+    }
+  }
+
+  .checkmark {
+    position: relative;
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 8px 0 0;
+    border: 1px solid $gray;
+    border-radius: 100%;
+
+    transition: 0.3s;
+
+    &:after {
+      position: absolute;
+      left: 6px;
+      top: 3px;
+
+      width: 4px;
+      height: 8px;
+      border: solid $gray;
+      border-width: 0 2px 2px 0;
+
+      transform: rotate(45deg);
+
+      content: "";
+    }
+  }
+
+  &:hover .checkmark {
+    border-color: $accent;
+  }
+}

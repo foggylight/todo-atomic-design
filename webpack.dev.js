@@ -11,20 +11,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[name]__[local]',
-              },
-            },
-          },
-        ],
-      },
-      {
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
@@ -32,6 +18,7 @@ module.exports = merge(common, {
             loader: 'css-loader',
             options: {
               modules: {
+                auto: true,
                 localIdentName: '[name]__[local]',
               },
             },
