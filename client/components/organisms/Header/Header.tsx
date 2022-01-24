@@ -1,15 +1,34 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { Heading } from '../../atoms/Heading/Heading';
 
 import styles from './Header.module.scss';
 
-interface HeaderProps {
-  headingText: string;
+interface INavLink {
+  name: string;
+  path: string;
 }
 
-export const Header = ({ headingText }: HeaderProps) => (
+interface HeaderProps {
+  headingText: string;
+  navLinks: INavLink[];
+}
+
+export const Header = ({ headingText, navLinks }: HeaderProps) => (
   <div className={styles.container}>
     <Heading text={headingText} />
+    <div className={styles.nav}>
+      {navLinks.map((link) => (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `${styles['nav-link']} ${styles['nav-link_active']}` : styles['nav-link']
+          }
+          to={link.path}
+        >
+          {link.name}
+        </NavLink>
+      ))}
+    </div>
   </div>
 );

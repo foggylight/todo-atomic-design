@@ -2,17 +2,21 @@ import React from 'react';
 
 import { PageWrapper } from '../../atoms/PageWrapper/PageWrapper';
 import { Header } from '../../organisms/Header/Header';
-import { NewTaskInput } from '../../molecules/NewTaskInput/NewTaskInput';
-import { TasksBlock } from '../../organisms/TasksBlock/TasksBlock';
+import { TextBlock } from '../../atoms/TextBlock/TextBlock';
 import { links } from '../../../navigationLinks';
 
-export const Todo = () => {
+import styles from './Description.module.scss';
+
+interface DescriptionProps {
+  text: string;
+}
+
+export const Description = ({ text }: DescriptionProps) => {
   return (
     <PageWrapper>
       <>
         <Header headingText="Todo App" navLinks={links} />
-        <NewTaskInput />
-        <TasksBlock />
+        <TextBlock className={styles['text-block']} text={text} />
       </>
     </PageWrapper>
   );
