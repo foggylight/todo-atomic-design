@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: './client/index.tsx',
@@ -17,8 +18,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'client/index.html',
     }),
-
     new MiniCssExtractPlugin(),
+    new WebpackManifestPlugin(),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -26,5 +27,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'public'),
+    publicPath: '',
   },
 };

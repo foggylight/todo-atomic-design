@@ -1,5 +1,6 @@
 {
     "env": {
+        "node": false,
         "browser": true
     },
     "extends": [
@@ -25,5 +26,14 @@
             }
         ],
         "import/prefer-default-export": 0
-    }
+    },
+    "overrides": [
+        {
+            "files": "server/**/*",
+            "env": {
+                "node": true,
+                "browser": false
+            }
+        }
+    ]
 }
