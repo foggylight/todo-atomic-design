@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { tasks } from '../../taskManager/Tasks';
 import { Todo } from '../templates/Todo/TodoTemplate';
 import { ITask } from '../../taskManager/models';
+import { TaskContext } from '../../taskManager/taskContext';
 
 export const TodoPage: React.FC = () => {
   const [allTasks, setTasks] = useState(tasks);
@@ -30,7 +31,11 @@ export const TodoPage: React.FC = () => {
     [allTasks],
   );
 
+  const contextValue = useMemo(() => ({ allTasks, addTask, deleteTask, updateTask }), [allTasks]);
+
   return (
-    <Todo tasks={allTasks} addNewTask={addTask} updateTask={updateTask} deleteTask={deleteTask} />
+    <TaskContext.Provider value={contextValue}>
+      <Todo />
+    </TaskContext.Provider>
   );
 };

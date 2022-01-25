@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Input } from '../../atoms/Input/Input';
 import { Button } from '../../atoms/Button/Button';
-import { ITask, TaskState } from '../../../taskManager/models';
+import { TaskState } from '../../../taskManager/models';
+import { TaskContext } from '../../../taskManager/taskContext';
 
 import styles from './NewTaskInput.module.scss';
 
-interface NewTaskInputProps {
-  onAddNewTask: (newItem: ITask) => void;
-}
-
-export const NewTaskInput: React.FC<NewTaskInputProps> = ({ onAddNewTask }) => {
+export const NewTaskInput: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
 
+  const { addTask } = useContext(TaskContext);
+
   const addNewTaskHandler = () => {
-    onAddNewTask({
+    addTask({
       id: Math.floor(Math.random() * 1000),
       name: inputValue,
       state: TaskState.active,

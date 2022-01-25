@@ -1,31 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Task } from '../Task/Task';
 import { ITask, TaskState } from '../../../taskManager/models';
+import { TaskContext } from '../../../taskManager/taskContext';
 
 import styles from './TasksBlock.module.scss';
 
-interface TasksBlockProps {
-  tasksList: ITask[];
-  onDeleteTask: (itemId: number) => void;
-  onUpdateTask: (newData: ITask) => void;
-}
+export const TasksBlock: React.FC = () => {
+  const { allTasks } = useContext(TaskContext);
 
-export const TasksBlock: React.FC<TasksBlockProps> = ({
-  tasksList,
-  onDeleteTask,
-  onUpdateTask,
-}) => {
   return (
     <div className={styles['tasks-block']}>
-      {tasksList.map((task: ITask) => (
+      {allTasks.map((task: ITask) => (
         <Task
           id={task.id}
           key={task.id}
           taskName={task.name}
           isDone={task.state === TaskState.done}
-          onDeleteTask={onDeleteTask}
-          onUpdateTask={onUpdateTask}
         />
       ))}
     </div>
