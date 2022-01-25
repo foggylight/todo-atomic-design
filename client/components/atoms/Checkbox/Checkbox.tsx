@@ -8,7 +8,7 @@ interface CheckboxProps {
   changeState?: (value: boolean) => void;
 }
 
-export const Checkbox = ({ id, checked, changeState }: CheckboxProps) => {
+export const Checkbox: React.FC<CheckboxProps> = ({ id, checked, changeState }) => {
   const isChecked = () => {
     changeState(!checked);
   };

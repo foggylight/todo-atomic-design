@@ -10,7 +10,7 @@ interface NewTaskInputProps {
   onAddNewTask: (newItem: ITask) => void;
 }
 
-export const NewTaskInput = ({ onAddNewTask }: NewTaskInputProps) => {
+export const NewTaskInput: React.FC<NewTaskInputProps> = ({ onAddNewTask }) => {
   const [inputValue, setInputValue] = useState('');
 
   const addNewTaskHandler = () => {
@@ -19,11 +19,17 @@ export const NewTaskInput = ({ onAddNewTask }: NewTaskInputProps) => {
       name: inputValue,
       state: TaskState.active,
     });
+    setInputValue('');
   };
 
   return (
     <div className={styles['main-block']}>
-      <Input placeholder="New task" className={styles.input} onChange={setInputValue} />
+      <Input
+        placeholder="New task"
+        value={inputValue}
+        className={styles.input}
+        onChange={setInputValue}
+      />
       <Button type="submit" text="Add" onBtnClick={addNewTaskHandler} />
     </div>
   );

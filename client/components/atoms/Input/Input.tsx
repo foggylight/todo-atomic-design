@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './Input.module.scss';
 
 interface InputProps {
   placeholder?: string;
   className?: string;
-  defaultValue?: string;
+  value?: string;
   onChange?: (value: string) => void | undefined;
 }
 
-export const Input = ({ placeholder, className, defaultValue, onChange }: InputProps) => {
-  const [value, setValue] = useState(defaultValue);
-
+export const Input: React.FC<InputProps> = ({ placeholder, className, value, onChange }) => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
     onChange(event.currentTarget.value);
-    if (onChange) {
-      onChange(event.currentTarget.value);
-    }
   };
 
   return (
@@ -33,6 +27,6 @@ export const Input = ({ placeholder, className, defaultValue, onChange }: InputP
 Input.defaultProps = {
   placeholder: '',
   className: '',
-  defaultValue: '',
+  value: '',
   onChange: undefined,
 };

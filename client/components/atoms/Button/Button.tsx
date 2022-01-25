@@ -9,7 +9,7 @@ interface ButtonProps {
   onBtnClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const Button = ({ type, text, className, onBtnClick }: ButtonProps) => (
+export const Button: React.FC<ButtonProps> = ({ type, text, className, onBtnClick }) => (
   <button
     className={`${styles.btn} ${className}`}
     type={type === 'submit' ? 'submit' : 'button'}

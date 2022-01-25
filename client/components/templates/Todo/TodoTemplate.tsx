@@ -11,17 +11,15 @@ interface TodoProps {
   tasks: ITask[];
   addNewTask: (newItem: ITask) => void;
   deleteTask: (itemId: number) => void;
-  updateTask: (itemId: number, newData: ITask) => void;
+  updateTask: (newData: ITask) => void;
 }
 
-export const Todo = ({ tasks, addNewTask, updateTask, deleteTask }: TodoProps) => {
+export const Todo: React.FC<TodoProps> = ({ tasks, addNewTask, updateTask, deleteTask }) => {
   return (
     <PageWrapper>
-      <>
-        <Header headingText="Todo App" navLinks={links} />
-        <NewTaskInput onAddNewTask={addNewTask} />
-        <TasksBlock tasksList={tasks} onUpdateTask={updateTask} onDeleteTask={deleteTask} />
-      </>
+      <Header headingText="Todo App" navLinks={links} />
+      <NewTaskInput onAddNewTask={addNewTask} />
+      <TasksBlock tasksList={tasks} onUpdateTask={updateTask} onDeleteTask={deleteTask} />
     </PageWrapper>
   );
 };

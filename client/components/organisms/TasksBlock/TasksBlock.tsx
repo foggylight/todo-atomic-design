@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Task } from '../../molecules/Task/Task';
+import { Task } from '../Task/Task';
 import { ITask, TaskState } from '../../../taskManager/models';
 
 import styles from './TasksBlock.module.scss';
@@ -8,10 +8,14 @@ import styles from './TasksBlock.module.scss';
 interface TasksBlockProps {
   tasksList: ITask[];
   onDeleteTask: (itemId: number) => void;
-  onUpdateTask: (itemId: number, newData: ITask) => void;
+  onUpdateTask: (newData: ITask) => void;
 }
 
-export const TasksBlock = ({ tasksList, onDeleteTask, onUpdateTask }: TasksBlockProps) => {
+export const TasksBlock: React.FC<TasksBlockProps> = ({
+  tasksList,
+  onDeleteTask,
+  onUpdateTask,
+}) => {
   return (
     <div className={styles['tasks-block']}>
       {tasksList.map((task: ITask) => (

@@ -11,13 +11,9 @@ interface DescriptionProps {
   text: string;
 }
 
-export const Description = ({ text }: DescriptionProps) => {
-  return (
-    <PageWrapper>
-      <>
-        <Header headingText="Todo App" navLinks={links} />
-        <TextBlock className={styles['text-block']} text={text} />
-      </>
-    </PageWrapper>
-  );
-};
+export const Description: React.FC<DescriptionProps> = ({ text }) => (
+  <PageWrapper>
+    <Header headingText="Todo App" navLinks={links} />
+    <TextBlock className={styles['text-block']} text={text} />
+  </PageWrapper>
+);

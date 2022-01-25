@@ -6,7 +6,7 @@ import { DescriptionPage } from './components/pages/DescriptionPage';
 
 import './ui/default.scss';
 
-export const App = () => (
+export const App: React.FC = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<TodoPage />} />

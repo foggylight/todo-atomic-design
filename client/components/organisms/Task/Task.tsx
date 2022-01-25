@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '../../atoms/Button/Button';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
@@ -12,21 +12,17 @@ interface TaskProps {
   taskName: string;
   isDone: boolean;
   onDeleteTask: (itemId: number) => void;
-  onUpdateTask: (itemId: number, newData: ITask) => void;
+  onUpdateTask: (newData: ITask) => void;
 }
 
-export const Task = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }: TaskProps) => {
+export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }) => {
   const [isChecked, setTaskState] = useState(isDone);
   const [isEdited, setEditedState] = useState(false);
   const [newTaskName, setNewTaskName] = useState(taskName);
 
-  // useEffect(() => {
-  //   onUpdateTask(id, {
-  //     id,
-  //     name: taskName,
-  //     state: isChecked ? TaskState.done : TaskState.active,
-  //   });
-  // }, [isChecked]);
+  useEffect(() => {
+    onUpdateTask({ id, name: taskName, state: isChecked ? TaskState.done : TaskState.active });
+  }, [isChecked]);
 
   const onEditHandler = () => {
     setEditedState(true);
@@ -34,7 +30,7 @@ export const Task = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }: TaskP
 
   const onSaveEditHandler = () => {
     setEditedState(false);
-    onUpdateTask(id, {
+    onUpdateTask({
       id,
       name: newTaskName,
       state: isDone ? TaskState.done : TaskState.active,
@@ -51,7 +47,7 @@ export const Task = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }: TaskP
         <Input
           placeholder="Change task name"
           className={styles['task-name']}
-          defaultValue={taskName}
+          value={newTaskName}
           onChange={setNewTaskName}
         />
       ) : (

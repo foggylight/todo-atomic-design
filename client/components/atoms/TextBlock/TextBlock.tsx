@@ -7,7 +7,7 @@ interface TextBlockProps {
   className?: string;
 }
 
-export const TextBlock = ({ text, className }: TextBlockProps) => (
+export const TextBlock: React.FC<TextBlockProps> = ({ text, className }) => (
   <p className={`${styles.text} ${className}`}>{text}</p>
 );
 

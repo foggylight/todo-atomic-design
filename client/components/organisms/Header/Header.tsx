@@ -16,7 +16,7 @@ interface HeaderProps {
   navLinks: INavLink[];
 }
 
-export const Header = ({ headingText, navLinks }: HeaderProps) => (
+export const Header: React.FC<HeaderProps> = ({ headingText, navLinks }) => (
   <div className={styles.container}>
     <Heading text={headingText} />
     <div className={styles.nav}>
