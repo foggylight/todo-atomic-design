@@ -1,10 +1,11 @@
 import { ITask } from './models';
+import { tasks } from './Tasks';
 
 export class TaskApi {
   tasks: ITask[];
 
-  constructor(items: Array<ITask>) {
-    this.tasks = items;
+  constructor() {
+    this.tasks = tasks;
   }
 
   getAllTasks() {

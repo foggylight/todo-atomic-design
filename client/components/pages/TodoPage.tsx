@@ -4,12 +4,11 @@ import { Todo } from '../templates/Todo/TodoTemplate';
 import { ITask, TaskState } from '../../taskManager/models';
 import { TaskContext } from '../../taskManager/taskContext';
 import { TaskApi } from '../../taskManager/taskApi';
-import { tasks } from '../../taskManager/Tasks';
 
 export const TodoPage: React.FC = () => {
-  const api = new TaskApi(tasks);
-  const taskList = api.getAllTasks();
-  const [allTasks, setTasks] = useState(taskList);
+  const api = new TaskApi();
+  const tasks = api.getAllTasks();
+  const [allTasks, setTasks] = useState(tasks);
 
   const addTask = useCallback(
     (taskName) => {
@@ -19,7 +18,7 @@ export const TodoPage: React.FC = () => {
         state: TaskState.active,
       };
       api.addTask(newTask);
-      setTasks(api.getAllTasks());
+      setTasks([...api.getAllTasks()]);
     },
     [allTasks],
   );
@@ -27,7 +26,7 @@ export const TodoPage: React.FC = () => {
   const deleteTask = useCallback(
     (taskId: number) => {
       api.deleteTask(taskId);
-      setTasks(api.getAllTasks());
+      setTasks([...api.getAllTasks()]);
     },
     [allTasks],
   );
@@ -35,7 +34,7 @@ export const TodoPage: React.FC = () => {
   const updateTask = useCallback(
     (newTaskData: ITask) => {
       api.updateTask(newTaskData);
-      setTasks(api.getAllTasks());
+      setTasks([...api.getAllTasks()]);
     },
     [allTasks],
   );
