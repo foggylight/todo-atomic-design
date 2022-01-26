@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '../../atoms/Button/Button';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 import { Input } from '../../atoms/Input/Input';
-import { TaskState } from '../../../taskManager/models';
-import { TaskContext } from '../../../taskManager/taskContext';
+import { ITask, TaskState } from '../../../taskManager/models';
 
 import styles from './Task.module.scss';
 
@@ -12,17 +11,17 @@ interface TaskProps {
   id: number;
   taskName: string;
   isDone: boolean;
+  onDeleteTask: (itemId: number) => void;
+  onUpdateTask: (newData: ITask) => void;
 }
 
-export const Task: React.FC<TaskProps> = ({ id, taskName, isDone }) => {
+export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }) => {
   const [isChecked, setTaskState] = useState(isDone);
   const [isEdited, setEditedState] = useState(false);
   const [newTaskName, setNewTaskName] = useState(taskName);
 
-  const { deleteTask, updateTask } = useContext(TaskContext);
-
   useEffect(() => {
-    updateTask({ id, name: taskName, state: isChecked ? TaskState.done : TaskState.active });
+    onUpdateTask({ id, name: taskName, state: isChecked ? TaskState.done : TaskState.active });
   }, [isChecked]);
 
   const onEditHandler = () => {
@@ -31,15 +30,15 @@ export const Task: React.FC<TaskProps> = ({ id, taskName, isDone }) => {
 
   const onSaveEditHandler = () => {
     setEditedState(false);
-    updateTask({
+    onUpdateTask({
       id,
       name: newTaskName,
-      state: isDone ? TaskState.done : TaskState.active,
+      state: isChecked ? TaskState.done : TaskState.active,
     });
   };
 
   const onDeleteHandler = () => {
-    deleteTask(id);
+    onDeleteTask(id);
   };
 
   return (

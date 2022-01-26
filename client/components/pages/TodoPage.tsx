@@ -2,14 +2,19 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import { tasks } from '../../taskManager/Tasks';
 import { Todo } from '../templates/Todo/TodoTemplate';
-import { ITask } from '../../taskManager/models';
+import { ITask, TaskState } from '../../taskManager/models';
 import { TaskContext } from '../../taskManager/taskContext';
 
 export const TodoPage: React.FC = () => {
   const [allTasks, setTasks] = useState(tasks);
 
   const addTask = useCallback(
-    (newTask: ITask) => {
+    (taskName) => {
+      const newTask = {
+        id: Math.floor(Math.random() * 1000),
+        name: taskName,
+        state: TaskState.active,
+      };
       setTasks([...allTasks, newTask]);
     },
     [allTasks],
