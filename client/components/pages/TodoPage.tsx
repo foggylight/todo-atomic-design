@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Todo } from '../templates/Todo/TodoTemplate';
 import { ITask, TaskState } from '../../taskManager/models';
@@ -6,35 +6,45 @@ import { TaskContext } from '../../taskManager/taskContext';
 import { TaskApi } from '../../taskManager/taskApi';
 
 export const TodoPage: React.FC = () => {
-  const api = new TaskApi();
-  const tasks = api.getAllTasks();
-  const [allTasks, setTasks] = useState(tasks);
+  const api = useMemo(() => new TaskApi(), []);
+  const [allTasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasks = await api.getAllTasks();
+      setTasks(tasks);
+    };
+    getTasks();
+  }, []);
 
   const addTask = useCallback(
-    (taskName) => {
+    async (taskName) => {
       const newTask = {
         id: Math.floor(Math.random() * 1000),
         name: taskName,
         state: TaskState.active,
       };
-      api.addTask(newTask);
-      setTasks([...api.getAllTasks()]);
+      await api.addTask(newTask);
+      const tasks = await api.getAllTasks();
+      setTasks([...tasks]);
     },
     [allTasks],
   );
 
   const deleteTask = useCallback(
-    (taskId: number) => {
-      api.deleteTask(taskId);
-      setTasks([...api.getAllTasks()]);
+    async (taskId: number) => {
+      await api.deleteTask(taskId);
+      const tasks = await api.getAllTasks();
+      setTasks([...tasks]);
     },
     [allTasks],
   );
 
   const updateTask = useCallback(
-    (newTaskData: ITask) => {
-      api.updateTask(newTaskData);
-      setTasks([...api.getAllTasks()]);
+    async (newTaskData: ITask) => {
+      await api.updateTask(newTaskData);
+      const tasks = await api.getAllTasks();
+      setTasks([...tasks]);
     },
     [allTasks],
   );

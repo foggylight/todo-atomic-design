@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Button } from '../../atoms/Button/Button';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
@@ -20,9 +20,14 @@ export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, 
   const [isEdited, setEditedState] = useState(false);
   const [newTaskName, setNewTaskName] = useState(taskName);
 
-  useEffect(() => {
-    onUpdateTask({ id, name: taskName, state: isChecked ? TaskState.done : TaskState.active });
-  }, [isChecked]);
+  const onUpdateStateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTaskState(!isChecked);
+    onUpdateTask({
+      id,
+      name: taskName,
+      state: event.currentTarget.checked ? TaskState.done : TaskState.active,
+    });
+  };
 
   const onEditHandler = () => {
     setEditedState(true);
@@ -52,7 +57,7 @@ export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, 
         />
       ) : (
         <div className={styles['task-name']}>
-          <Checkbox id={taskName} checked={isChecked} changeState={setTaskState} />
+          <Checkbox id={taskName} checked={isChecked} onChangeState={onUpdateStateHandler} />
           <span className={isChecked ? styles['task-done'] : ''}>{taskName}</span>
         </div>
       )}
