@@ -23,6 +23,7 @@ app.get('/', (request, response) => {
   response.render('client', { assets, component });
 });
 
+app.use(express.json());
 app.use('/tasks', router);
 
 app.listen(port, () => {

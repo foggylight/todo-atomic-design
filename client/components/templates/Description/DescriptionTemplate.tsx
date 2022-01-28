@@ -3,7 +3,7 @@ import React from 'react';
 import { PageWrapper } from '../../atoms/PageWrapper/PageWrapper';
 import { Header } from '../../organisms/Header/Header';
 import { TextBlock } from '../../atoms/TextBlock/TextBlock';
-import { links } from '../../../navigationLinks';
+import { links } from '../../../constants/navigationLinks';
 
 import styles from './Description.module.scss';
 

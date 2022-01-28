@@ -4,7 +4,7 @@ import { PageWrapper } from '../../atoms/PageWrapper/PageWrapper';
 import { Header } from '../../organisms/Header/Header';
 import { TextInputForm } from '../../molecules/TextInputForm/TextInputForm';
 import { TasksBlock } from '../../organisms/TasksBlock/TasksBlock';
-import { links } from '../../../navigationLinks';
+import { links } from '../../../constants/navigationLinks';
 import { TaskContext } from '../../../taskManager/taskContext';
 
 export const Todo: React.FC = () => {

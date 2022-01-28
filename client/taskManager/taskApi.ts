@@ -1,28 +1,62 @@
+/* eslint-disable class-methods-use-this */
+import { API_URL } from '../constants/apiUrl';
 import { ITask } from './models';
-import { tasks } from './Tasks';
 
 export class TaskApi {
   tasks: ITask[];
 
   constructor() {
-    this.tasks = tasks;
+    this.tasks = [];
   }
 
   async getAllTasks() {
-    return this.tasks;
+    try {
+      const response = await fetch(`${API_URL}tasks/`);
+      const allTasks = await response.json();
+      return allTasks;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
   }
 
   async addTask(newTask: ITask) {
-    this.tasks.push(newTask);
+    try {
+      const body = {
+        newTask,
+      };
+      await fetch(`${API_URL}tasks/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async deleteTask(taskId: number) {
-    const taskIndex = this.tasks.findIndex((task: ITask) => task.id === taskId);
-    this.tasks.splice(taskIndex, 1);
+    try {
+      await fetch(`${API_URL}tasks/:${taskId}`, {
+        method: 'DELETE',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async updateTask(updatedTask: ITask) {
-    const itemIndex = this.tasks.findIndex((item: ITask) => item.id === updatedTask.id);
-    this.tasks.splice(itemIndex, 1, updatedTask);
+    try {
+      const body = {
+        updatedTask,
+      };
+      await fetch(`${API_URL}tasks/`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

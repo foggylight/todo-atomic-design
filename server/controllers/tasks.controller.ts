@@ -13,18 +13,18 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.post('/', (req: Request, res: Response) => {
-  const newTask = req.body;
-  addTask(JSON.parse(newTask));
+  const { newTask } = req.body;
+  addTask(newTask);
   res.send('Task was added');
 });
 
 router.put('/', (req: Request, res: Response) => {
-  const updatedTask = req.body;
-  editTask(JSON.parse(updatedTask));
+  const { updatedTask } = req.body;
+  editTask(updatedTask);
   res.send('Task was updated');
 });
 
-router.delete(':id', (req: Request, res: Response) => {
+router.delete('/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   deleteTask(Number(id));
   res.send(`Task ${id} was deleted`);

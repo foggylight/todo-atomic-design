@@ -6,7 +6,7 @@
         "build:server": "webpack --config webpack.server.js",
         "watch:client": "webpack serve --open --config webpack.dev.js",
         "watch:server": "nodemon dist/server.js",
-        "start": "node ./dist/server.js",
+        "start": "webpack --config webpack.prod.js && webpack --config webpack.server.js && node ./dist/server.js",
         "lint": "eslint client server",
         "test": "npx jest",
         "postinstall": "husky install"
