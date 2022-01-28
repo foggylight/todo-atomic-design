@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { App } from '../client/App';
+import { router } from './controllers/tasks.controller';
 
 const app = express();
 const port = 5000;
@@ -21,6 +22,8 @@ app.get('/', (request, response) => {
   const component = ReactDOMServer.renderToString(React.createElement(App));
   response.render('client', { assets, component });
 });
+
+app.use('/tasks', router);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}!`);
