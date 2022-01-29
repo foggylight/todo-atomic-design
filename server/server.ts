@@ -5,7 +5,9 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { App } from '../client/App';
-import { router } from './controllers/tasks.controller';
+import { createRouter } from './controllers/tasks.controller';
+import { InMemoryTaskRepository } from './repository/InMemoryTaskRepository';
+import { TaskUseCases } from './useCases/TasksUseCases';
 
 const app = express();
 const port = 5000;
@@ -22,6 +24,10 @@ app.get('/', (request, response) => {
   const component = ReactDOMServer.renderToString(React.createElement(App));
   response.render('client', { assets, component });
 });
+
+const repository = new InMemoryTaskRepository();
+const useCases = new TaskUseCases(repository);
+const router = createRouter(useCases);
 
 app.use(express.json());
 app.use('/tasks', router);

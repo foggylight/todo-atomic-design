@@ -37,7 +37,7 @@ export class TaskApi {
 
   async deleteTask(taskId: number) {
     try {
-      await fetch(`${API_URL}tasks/:${taskId}`, {
+      await fetch(`${API_URL}tasks/${taskId}`, {
         method: 'DELETE',
       });
     } catch (error) {
