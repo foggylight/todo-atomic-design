@@ -7,8 +7,8 @@ import styles from './TasksBlock.module.scss';
 
 interface TasksBlockProps {
   tasksList: ITask[];
-  onDeleteTask: (itemId: number) => void;
-  onUpdateTask: (newData: ITask) => void;
+  onDeleteTask: (itemId: string) => void;
+  onUpdateTask: (taskId: string, newData: ITask) => void;
 }
 
 export const TasksBlock: React.FC<TasksBlockProps> = ({

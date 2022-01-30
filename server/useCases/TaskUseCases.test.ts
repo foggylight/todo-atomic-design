@@ -7,50 +7,50 @@ const makeRepository = (): TaskRepository => {
   return new InMemoryTaskRepository();
 };
 
-test('get all tasks', () => {
+test('get all tasks', async () => {
   const repository = makeRepository();
   const manager = new TaskUseCases(repository);
-  const allTasks = manager.getAllTasks();
+  const allTasks = await manager.getAllTasks();
 
   expect(allTasks).toEqual(repository.getAll());
 });
 
-test('add task', () => {
+test('add task', async () => {
   const repository = makeRepository();
   const manager = new TaskUseCases(repository);
 
   const newTask: ITask = {
-    id: 3,
     name: 'task3',
     state: TaskState.active,
   };
-  manager.addTask(newTask);
+  await manager.addTask(newTask);
+  const tasks = await manager.getAllTasks();
 
-  expect(manager.getAllTasks()).toContainEqual(newTask);
+  expect(tasks.find((task) => task.name === newTask.name)).toMatchObject(newTask);
 });
 
-test('delete task', () => {
+test('delete task', async () => {
   const repository = makeRepository();
   const manager = new TaskUseCases(repository);
 
-  const deletedTaskId = 2;
+  const deletedTaskId = '2';
   manager.deleteTask(deletedTaskId);
+  const tasks = await manager.getAllTasks();
 
-  expect(manager.getAllTasks().find((task) => task.id === deletedTaskId)).toBeUndefined();
+  expect(tasks.find((task) => task.id === deletedTaskId)).toBeUndefined();
 });
 
-test('update task', () => {
+test('update task', async () => {
   const repository = makeRepository();
   const manager = new TaskUseCases(repository);
 
+  const taskId = '1';
   const newTaskData = {
-    id: 1,
     name: 'newName',
-    state: TaskState.active,
   };
-  manager.updateTask(newTaskData);
 
-  expect(manager.getAllTasks().find((task) => task.id === newTaskData.id)).toMatchObject(
-    newTaskData,
-  );
+  await manager.updateTask(taskId, newTaskData);
+  const tasks = await manager.getAllTasks();
+
+  expect(tasks.find((task) => task.id === taskId)).toMatchObject(newTaskData);
 });

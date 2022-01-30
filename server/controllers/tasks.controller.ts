@@ -5,26 +5,26 @@ import { TaskService } from '../useCases/TaskService';
 export const createRouter = (useCases: TaskService) => {
   const router = Router();
 
-  router.get('/', (req: Request, res: Response) => {
-    const tasks = useCases.getAllTasks();
+  router.get('/', async (req: Request, res: Response) => {
+    const tasks = await useCases.getAllTasks();
     res.send(tasks);
   });
 
-  router.post('/', (req: Request, res: Response) => {
+  router.post('/', async (req: Request, res: Response) => {
     const { newTask } = req.body;
-    useCases.addTask(newTask);
+    await useCases.addTask(newTask);
     res.send('Task was added');
   });
 
-  router.put('/', (req: Request, res: Response) => {
-    const { updatedTask } = req.body;
-    useCases.updateTask(updatedTask);
+  router.put('/', async (req: Request, res: Response) => {
+    const { taskId, newTaskData } = req.body;
+    await useCases.updateTask(taskId, newTaskData);
     res.send('Task was updated');
   });
 
-  router.delete('/:id', (req: Request, res: Response) => {
+  router.delete('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
-    useCases.deleteTask(Number(id));
+    await useCases.deleteTask(id);
     res.send(`Task ${id} was deleted`);
   });
 

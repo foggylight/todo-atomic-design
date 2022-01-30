@@ -8,11 +8,11 @@ import { ITask, TaskState } from '../../../taskManager/models';
 import styles from './Task.module.scss';
 
 interface TaskProps {
-  id: number;
+  id: string;
   taskName: string;
   isDone: boolean;
-  onDeleteTask: (itemId: number) => void;
-  onUpdateTask: (newData: ITask) => void;
+  onDeleteTask: (itemId: string) => void;
+  onUpdateTask: (taskId: string, newData: ITask) => void;
 }
 
 export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, onUpdateTask }) => {
@@ -22,9 +22,7 @@ export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, 
 
   const onUpdateStateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskState(!isChecked);
-    onUpdateTask({
-      id,
-      name: taskName,
+    onUpdateTask(id, {
       state: event.currentTarget.checked ? TaskState.done : TaskState.active,
     });
   };
@@ -35,10 +33,8 @@ export const Task: React.FC<TaskProps> = ({ id, taskName, isDone, onDeleteTask, 
 
   const onSaveEditHandler = () => {
     setEditedState(false);
-    onUpdateTask({
-      id,
+    onUpdateTask(id, {
       name: newTaskName,
-      state: isChecked ? TaskState.done : TaskState.active,
     });
   };
 

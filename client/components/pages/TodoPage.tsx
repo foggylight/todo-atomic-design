@@ -20,7 +20,6 @@ export const TodoPage: React.FC = () => {
   const addTask = useCallback(
     async (taskName) => {
       const newTask = {
-        id: Math.floor(Math.random() * 1000),
         name: taskName,
         state: TaskState.active,
       };
@@ -32,7 +31,7 @@ export const TodoPage: React.FC = () => {
   );
 
   const deleteTask = useCallback(
-    async (taskId: number) => {
+    async (taskId: string) => {
       await api.deleteTask(taskId);
       const tasks = await api.getAllTasks();
       setTasks([...tasks]);
@@ -41,8 +40,8 @@ export const TodoPage: React.FC = () => {
   );
 
   const updateTask = useCallback(
-    async (newTaskData: ITask) => {
-      await api.updateTask(newTaskData);
+    async (taskId: string, newTaskData: ITask) => {
+      await api.updateTask(taskId, newTaskData);
       const tasks = await api.getAllTasks();
       setTasks([...tasks]);
     },

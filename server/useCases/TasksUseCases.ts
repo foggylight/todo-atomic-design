@@ -1,27 +1,29 @@
+import { TaskGateway } from '../gateway/TaskGateway';
 import { ITask } from '../repository/models';
 import { TaskRepository } from '../repository/TaskRepository';
 import { TaskService } from './TaskService';
 
 export class TaskUseCases implements TaskService {
-  repository: TaskRepository;
+  repository: TaskRepository | TaskGateway;
 
-  constructor(repository: TaskRepository) {
+  constructor(repository: TaskRepository | TaskGateway) {
     this.repository = repository;
   }
 
-  getAllTasks() {
-    return this.repository.getAll();
+  async getAllTasks() {
+    const tasks = await this.repository.getAll();
+    return tasks;
   }
 
-  addTask(newTask: ITask) {
-    this.repository.addItem(newTask);
+  async addTask(newTask: ITask) {
+    await this.repository.addItem(newTask);
   }
 
-  deleteTask(taskId: number) {
-    this.repository.deleteItem(taskId);
+  async deleteTask(taskId: string) {
+    await this.repository.deleteItem(taskId);
   }
 
-  updateTask(newTaskData: ITask) {
-    this.repository.updateItem(newTaskData);
+  async updateTask(taskId: string, newTaskData: ITask) {
+    await this.repository.updateItem(taskId, newTaskData);
   }
 }

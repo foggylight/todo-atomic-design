@@ -6,7 +6,8 @@ import ReactDOMServer from 'react-dom/server';
 
 import { App } from '../client/App';
 import { createRouter } from './controllers/tasks.controller';
-import { InMemoryTaskRepository } from './repository/InMemoryTaskRepository';
+import { MongoDBTaskGateway } from './gateway/MongoDBTaskGateway';
+// import { InMemoryTaskRepository } from './repository/InMemoryTaskRepository';
 import { TaskUseCases } from './useCases/TasksUseCases';
 
 const app = express();
@@ -25,8 +26,9 @@ app.get('/', (request, response) => {
   response.render('client', { assets, component });
 });
 
-const repository = new InMemoryTaskRepository();
-const useCases = new TaskUseCases(repository);
+// const repository = new InMemoryTaskRepository();
+const gateway = new MongoDBTaskGateway();
+const useCases = new TaskUseCases(gateway);
 const router = createRouter(useCases);
 
 app.use(express.json());

@@ -35,7 +35,7 @@ export class TaskApi {
     }
   }
 
-  async deleteTask(taskId: number) {
+  async deleteTask(taskId: string) {
     try {
       await fetch(`${API_URL}tasks/${taskId}`, {
         method: 'DELETE',
@@ -45,10 +45,11 @@ export class TaskApi {
     }
   }
 
-  async updateTask(updatedTask: ITask) {
+  async updateTask(taskId: string, newTaskData: ITask) {
     try {
       const body = {
-        updatedTask,
+        taskId,
+        newTaskData,
       };
       await fetch(`${API_URL}tasks/`, {
         method: 'PUT',

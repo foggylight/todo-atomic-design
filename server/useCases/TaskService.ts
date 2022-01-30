@@ -1,8 +1,8 @@
 import { ITask } from '../repository/models';
 
 export interface TaskService {
-  getAllTasks: () => Array<ITask>;
+  getAllTasks: () => Promise<ITask[]>;
   addTask: (newTask: ITask) => void;
-  deleteTask: (taskId: number) => void;
-  updateTask: (updatedTask: ITask) => void;
+  deleteTask: (taskId: string) => void;
+  updateTask: (taskId: string, updatedTask: ITask) => void;
 }

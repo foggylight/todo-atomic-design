@@ -4,7 +4,7 @@ export enum TaskState {
 }
 
 export interface ITask {
-  id: number;
-  name: string;
-  state: TaskState;
+  id?: string;
+  name?: string;
+  state?: TaskState;
 }
