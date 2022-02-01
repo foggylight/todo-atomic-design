@@ -1,7 +1,7 @@
-import { ITask, TaskState } from './models';
-import { TaskRepository } from './TaskRepository';
+import { TaskGateway } from '../gateway/TaskGateway';
+import { ITask, TaskState } from '../useCases/models';
 
-export class InMemoryTaskRepository implements TaskRepository {
+export class InMemoryTaskRepository implements TaskGateway {
   items: ITask[];
 
   constructor() {
@@ -24,7 +24,7 @@ export class InMemoryTaskRepository implements TaskRepository {
     ];
   }
 
-  getAll() {
+  async getAll() {
     return this.items;
   }
 

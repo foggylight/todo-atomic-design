@@ -1,12 +1,11 @@
 import { TaskGateway } from '../gateway/TaskGateway';
-import { ITask } from '../repository/models';
-import { TaskRepository } from '../repository/TaskRepository';
+import { ITask } from './models';
 import { TaskService } from './TaskService';
 
 export class TaskUseCases implements TaskService {
-  repository: TaskRepository | TaskGateway;
+  repository: TaskGateway;
 
-  constructor(repository: TaskRepository | TaskGateway) {
+  constructor(repository: TaskGateway) {
     this.repository = repository;
   }
 

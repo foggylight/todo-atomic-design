@@ -1,4 +1,4 @@
-import { ITask } from '../repository/models';
+import { ITask } from '../useCases/models';
 
 export interface TaskGateway {
   getAll: () => Promise<ITask[]>;

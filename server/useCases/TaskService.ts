@@ -1,4 +1,4 @@
-import { ITask } from '../repository/models';
+import { ITask } from './models';
 
 export interface TaskService {
   getAllTasks: () => Promise<ITask[]>;

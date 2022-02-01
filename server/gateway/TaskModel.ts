@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { TaskState } from '../repository/models';
+import { TaskState } from '../useCases/models';
 
 const taskSchema = new mongoose.Schema({
   id: { type: String, required: true },

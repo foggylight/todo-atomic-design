@@ -1,9 +1,9 @@
+import { TaskGateway } from '../gateway/TaskGateway';
 import { InMemoryTaskRepository } from '../repository/InMemoryTaskRepository';
-import { ITask, TaskState } from '../repository/models';
-import { TaskRepository } from '../repository/TaskRepository';
+import { ITask, TaskState } from './models';
 import { TaskUseCases } from './TasksUseCases';
 
-const makeRepository = (): TaskRepository => {
+const makeRepository = (): TaskGateway => {
   return new InMemoryTaskRepository();
 };
 

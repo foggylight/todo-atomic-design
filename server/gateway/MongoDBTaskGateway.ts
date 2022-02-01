@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import mongoose from 'mongoose';
 
-import { ITask } from '../repository/models';
+import { ITask } from '../useCases/models';
 import { TaskModel } from './TaskModel';
 import { TaskGateway } from './TaskGateway';
 
