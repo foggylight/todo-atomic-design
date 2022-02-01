@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Todo } from '../templates/Todo/TodoTemplate';
 import { ITask, TaskState } from '../../taskManager/models';
-import { TaskContext } from '../../taskManager/taskContext';
+import { TaskContext } from '../../taskManager/TaskContext';
 import { TaskApi } from '../../taskManager/taskApi';
 
 export const TodoPage: React.FC = () => {

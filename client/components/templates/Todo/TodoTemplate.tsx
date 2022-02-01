@@ -5,7 +5,7 @@ import { Header } from '../../organisms/Header/Header';
 import { TextInputForm } from '../../molecules/TextInputForm/TextInputForm';
 import { TasksBlock } from '../../organisms/TasksBlock/TasksBlock';
 import { links } from '../../../constants/navigationLinks';
-import { TaskContext } from '../../../taskManager/taskContext';
+import { TaskContext } from '../../../taskManager/TaskContext';
 
 export const Todo: React.FC = () => {
   const { allTasks, addTask, deleteTask, updateTask } = useContext(TaskContext);
