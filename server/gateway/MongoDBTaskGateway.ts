@@ -8,10 +8,17 @@ import { TaskGateway } from './TaskGateway';
 
 export class MongoDBTaskGateway implements TaskGateway {
   constructor() {
+    const serviceName = process.env.SERVICE_NAME || 'localhost';
     const connect = async () => {
-      await mongoose.connect('mongodb://localhost:27017/todo-test');
+      try {
+        await mongoose.connect(`mongodb://${serviceName}:27017/todo-test`);
+        console.log('MongoDB is connected.');
+      } catch (error) {
+        console.log(error);
+        console.log('MongoDB connection is unsuccessful.');
+      }
     };
-    connect().catch((err) => console.log(err));
+    connect().catch((error) => console.log(error));
   }
 
   async getAll() {

@@ -6,5 +6,4 @@ RUN yarn set version berry
 COPY yarn.lock .yarn .yarnrc.yml ./
 RUN yarn install
 COPY . ./
-EXPOSE 5000
-CMD ["yarn", "start"]
+CMD yarn start
