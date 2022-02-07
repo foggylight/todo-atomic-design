@@ -1,5 +1,5 @@
 import { TaskGateway } from '../gateway/TaskGateway';
-import { InMemoryTaskRepository } from '../repository/InMemoryTaskRepository';
+import { InMemoryTaskRepository } from '../gateway/InMemoryTaskGateway';
 import { ITask, TaskState } from './models';
 import { TaskUseCases } from './TasksUseCases';
 

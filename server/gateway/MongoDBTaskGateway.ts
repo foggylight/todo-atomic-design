@@ -7,11 +7,10 @@ import { TaskModel } from './TaskModel';
 import { TaskGateway } from './TaskGateway';
 
 export class MongoDBTaskGateway implements TaskGateway {
-  constructor() {
-    const serviceName = process.env.SERVICE_NAME || 'localhost';
+  constructor(serviceName: string, port: string) {
     const connect = async () => {
       try {
-        await mongoose.connect(`mongodb://${serviceName}:27017/todo-test`);
+        await mongoose.connect(`mongodb://${serviceName}:${port}/todo-test`);
         console.log('MongoDB is connected.');
       } catch (error) {
         console.log(error);

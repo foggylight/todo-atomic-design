@@ -7,7 +7,6 @@ import ReactDOMServer from 'react-dom/server';
 import { App } from '../client/App';
 import { createRouter } from './controllers/tasks.controller';
 import { MongoDBTaskGateway } from './gateway/MongoDBTaskGateway';
-// import { InMemoryTaskRepository } from './repository/InMemoryTaskRepository';
 import { TaskUseCases } from './useCases/TasksUseCases';
 
 const app = express();
@@ -26,8 +25,9 @@ app.get('/', (request, response) => {
   response.render('client', { assets, component });
 });
 
-// const repository = new InMemoryTaskRepository();
-const gateway = new MongoDBTaskGateway();
+const serviceName = process.env.SERVICE_NAME || 'localhost';
+const servicePort = process.env.SERVICE_PORT || '27017';
+const gateway = new MongoDBTaskGateway(serviceName, servicePort);
 const useCases = new TaskUseCases(gateway);
 const router = createRouter(useCases);
 

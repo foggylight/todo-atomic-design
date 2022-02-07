@@ -1,4 +1,4 @@
-import { TaskGateway } from '../gateway/TaskGateway';
+import { TaskGateway } from './TaskGateway';
 import { ITask, TaskState } from '../useCases/models';
 
 export class InMemoryTaskRepository implements TaskGateway {
